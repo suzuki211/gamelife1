@@ -13,6 +13,7 @@ Rails.application.routes.draw do
       registrations: 'user/users/registrations',
       passwords: 'user/users/passwords'
     }
+    resources :games
   end
   root to: 'homes#top'
 end
