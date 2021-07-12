@@ -5,7 +5,7 @@ class User::GamesController < ApplicationController
 
   def create
     @game = Game.new(game_params)
-    @game.user_id = current_user.id
+    @game.user_id = current_user_user.id
     @game.save
     redirect_to user_games_path
   end
@@ -15,9 +15,14 @@ class User::GamesController < ApplicationController
   end
 
   def show
+    @game = Game.find(params[:id])
+    @game_comment = GameComment.new
   end
 
   def destroy
+    @game = Game.find(params[:id])
+    @game.destroy
+    redirect_to user_games_path
   end
 
   private

@@ -13,7 +13,9 @@ Rails.application.routes.draw do
       registrations: 'user/users/registrations',
       passwords: 'user/users/passwords'
     }
-    resources :games
+    resources :games do
+      resources :game_comments, only: [:create, :destroy]
+    end
   end
   root to: 'homes#top'
 end

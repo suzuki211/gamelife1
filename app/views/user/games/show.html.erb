@@ -1,0 +1,25 @@
+<div class="post-body">
+  <%= attachment_image_tag @game, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  <p>タイトル：<%= @game.title %></p>
+  <p>感想：<%= @game.impressions %></p>
+  <p>ユーザーネーム：<%= @game.user.name %></p>
+  <p>投稿日時：<%= @game.created_at.strftime('%Y/%m/%d') %></p>
+  <% if @game.user == current_user_user %>
+    <%= link_to "削除", user_game_path(@game), method: :delete %>
+  <% end %>
+</div>
+
+<div class="comments">
+  <p>コメント件数：<%= @game.game_comments.count %></p>
+    <% @game.game_comments.each do |game_comment| %>
+      <p><%= image_tag('no_image.jpg') %></p>
+      <%= game_comment.user.name %>
+      <%= game_comment.created_at.strftime('%Y/%m/%d') %><%= game_comment.comment %>
+    <% end %>
+</div>
+<div class="new-comment">
+  <%= form_with(model:[@game, @game_comment], local: true) do |f| %>
+    <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+    <%= f.submit "送信する" %>
+  <% end %>
+</div>
