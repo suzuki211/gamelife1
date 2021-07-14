@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  namespace :user do
+    get 'users/show'
+  end
   namespace :admin do
     devise_for :admins, controllers: {
       sessions:      'admin/admins/sessions',
@@ -16,6 +19,7 @@ Rails.application.routes.draw do
     resources :games do
       resources :game_comments, only: [:create, :destroy]
     end
+    resources :users, only: [:show]
   end
   root to: 'homes#top'
 end

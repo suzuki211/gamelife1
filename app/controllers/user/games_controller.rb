@@ -11,7 +11,7 @@ class User::GamesController < ApplicationController
   end
 
   def index
-    @games = Game.all
+    @games = Game.page(params[:page]).reverse_order
   end
 
   def show

@@ -1,5 +1,5 @@
 class Game < ApplicationRecord
   belongs_to :user
-  has_many :_comments, dependent: :destroy
-  attachment :image 
+  has_many :game_comments, dependent: :destroy
+  attachment :image
 end
