@@ -1,6 +1,9 @@
 <div class="profile-container">
   <h3 class="profile-name"><%= @user.name %></h3>
-  <%= image_tag('no_image.jpg') %>
+  <%= attachment_image_tag @user, :profile_image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+  <% if @user.id == current_user_user.id %>
+    <p><%= link_to "プロフィール編集", edit_user_user_path(@user) %></p>
+  <% end %>
 </div>
 
 <% @games.each do |game| %>

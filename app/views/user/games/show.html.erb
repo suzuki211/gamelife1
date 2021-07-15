@@ -7,18 +7,18 @@
   <% if @game.user == current_user_user %>
     <%= link_to "削除", user_game_path(@game), method: :delete %>
   <% end %>
+  <div id="favorite_<%= @game.id %>">
+    <%= render 'favorite', game: @game %>
+  </div>
 </div>
-
-<div class="comments">
-  <p>コメント件数：<%= @game.game_comments.count %></p>
-    <% @game.game_comments.each do |game_comment| %>
-      <p><%= image_tag('no_image.jpg') %></p>
-      <%= game_comment.user.name %>
-      <%= game_comment.created_at.strftime('%Y/%m/%d') %><%= game_comment.comment %>
-    <% end %>
+<div id="comments_area">
+  <div class="comments">
+    <p>コメント件数：<%= @game.game_comments.count %></p>
+      <%= render 'comment', locals: { comments: @game.game_comments} %>
+  </div>
 </div>
 <div class="new-comment">
-  <%= form_with model:[@game, @game_comment], url: user_game_game_comments_path(@game.id), local:true do |f| %>
+  <%= form_with model:[@game, @game_comment], url: user_game_game_comments_path(@game.id), remote: true do |f| %>
     <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
     <%= f.submit "送信する" %>
   <% end %>

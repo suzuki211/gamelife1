@@ -18,8 +18,10 @@ Rails.application.routes.draw do
     }
     resources :games do
       resources :game_comments, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
     end
-    resources :users, only: [:show]
+    resources :users, only: [:index, :show, :edit, :update]
   end
   root to: 'homes#top'
 end
+
