@@ -1,25 +1,46 @@
-<div class="post-body">
-  <%= attachment_image_tag @game, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
-  <p>タイトル：<%= @game.title %></p>
-  <p>感想：<%= @game.impressions %></p>
-  <p>ユーザーネーム：<%= @game.user.name %></p>
-  <p>投稿日時：<%= @game.created_at.strftime('%Y/%m/%d') %></p>
-  <% if @game.user == current_user_user %>
-    <%= link_to "削除", user_game_path(@game), method: :delete %>
-  <% end %>
-  <div id="favorite_<%= @game.id %>">
-    <%= render 'favorite', game: @game %>
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-3'>
+      <h2>User info</h2>
+      <%= render 'user/users/info', user: @game.user %>
+    </div>
+    <div class='col-md-8 offset-md-1'>
+  		<h2>Game detail</h2>
+  		<table class='table'>
+  		  <tr>
+  		    <td><%= link_to user_user_path(@game.user) do %>
+            <%= attachment_image_tag(@game.user, :profile_image, :fill, 100, 100, fallback: "no-image-icon.jpg") %><br>
+            <%= @game.user.name %>
+            <% end %>
+          </td>
+          <td><%= link_to @game.title, user_game_path(@game) %></td>
+          <td><%= @game.impressions %></td>
+          <td id="favorite_<%= @game.id %>">
+            <%= render 'favorite', game: @game %>
+          </td>
+          <td>コメント数：<%= @game.game_comments.count %></td>
+          <td>
+            aaa
+          </td>
+          <td>
+            <% if @game.user == current_user_user %>
+              <%= link_to "削除", user_game_path(@game), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_game_#{@game.id}" %>
+            <% end %>
+          </td>
+        </tr>
+      </table>
+      <div id="comments_area">
+        <div class="comments">
+          <p>コメント件数：<%= @game.game_comments.count %></p>
+          <%= render 'comment', locals: { comments: @game.game_comments} %>
+        </div>
+      </div>
+      <div class="new-comment">
+        <%= form_with model:[@game, @game_comment], url: user_game_game_comments_path(@game.id), remote: true do |f| %>
+          <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+          <%= f.submit "送信する" %>
+        <% end %>
+      </div>
+    </div>
   </div>
-</div>
-<div id="comments_area">
-  <div class="comments">
-    <p>コメント件数：<%= @game.game_comments.count %></p>
-      <%= render 'comment', locals: { comments: @game.game_comments} %>
-  </div>
-</div>
-<div class="new-comment">
-  <%= form_with model:[@game, @game_comment], url: user_game_game_comments_path(@game.id), remote: true do |f| %>
-    <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-    <%= f.submit "送信する" %>
-  <% end %>
 </div>
