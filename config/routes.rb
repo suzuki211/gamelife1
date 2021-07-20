@@ -8,6 +8,7 @@ Rails.application.routes.draw do
       passwords:     'admin/admins/passwords',
       registrations: 'admin/admins/registrations'
     }
+    resources :genres, only: [:index, :create, :edit, :update, :destroy]      #ジャンル
   end
 
   namespace :user do
@@ -20,8 +21,13 @@ Rails.application.routes.draw do
       resources :game_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
-    resources :users, only: [:index, :show, :edit, :update]
+    resources :users, only: [:index, :show, :edit, :update] do
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end
   end
   root to: 'homes#top'
+  get  "home/about" => 'homes#about'
 end
 

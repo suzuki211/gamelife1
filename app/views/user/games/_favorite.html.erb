@@ -1,13 +1,13 @@
 <% if game.favorited_by?(current_user_user) %>
     <p>
       <%= link_to user_game_favorites_path(game), method: :delete, remote: true do %>
-        ♥<%= game.favorites.count %> いいね
+        ♥<%= game.favorites.count %>
       <% end %>
     </p>
   <% else %>
     <p>
       <%= link_to user_game_favorites_path(game), method: :post, remote: true do %>
-        ♡<%= game.favorites.count %> いいね
+        ♡<%= game.favorites.count %>
       <% end %>
     </p>
   <% end %>
