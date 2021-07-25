@@ -8,16 +8,28 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
         <ul class="navbar-nav ml-auto">
+        <!--アドミンログイン時のヘッタ―-->
         <% if admin_admin_signed_in? %>
           <li>
             <%= link_to 'logout', destroy_admin_admin_session_path, method: :delete %>
           </li>
-        <% elsif user_user_signed_in? %>
+        <% elsif user_user_signed_in? %><!--ユーザ-ログイン時のヘッタ―-->
+          <!--検索機能-->
+          <div class="search_form">
+            <%= form_with url: user_search_path, local: true, method: :get do |f| %>
+              <%= f.text_field :word %>
+              <%= f.select :range, options_for_select([['UserName'], ['GameTitle']]) %>
+              <%= f.select :search, options_for_select([["完全一致","perfect_match"], ["前方一致","forward_match"],  ["後方一致","backword_match"], ["部分一致","partial_match"]]) %>
+              <%= f.submit "検索", class: "btn btn-primary" %>
+            <% end %>
+          </div>
+          <!--各機能へのリンク-->
           <li><%= link_to ' Mypage', user_user_path(current_user_user.id),class: 'fas fa-home nav-link text-light' %></li>
           <li><%= link_to ' Users', user_users_path,class: 'fas fa-users nav-link text-light' %></li>
           <li><%= link_to ' Games', user_games_path ,class: 'fas fa-book-open nav-link text-light'%></li>
           <li><%= link_to ' logout', destroy_user_user_session_path, method: :delete, class: 'fas fa-sign-out-alt nav-link text-light' %></li>
-        <% else %>
+        <% else %><!--未ログイン時のヘッタ―-->
+          <!--各機能へのリンク-->
           <li><%= link_to ' Home',root_path,class: 'fas fa-home nav-link text-light' %></li>
           <li><%= link_to ' About',home_about_path,class: 'fas fa-link nav-link text-light' %></li>
           <li><%= link_to ' sign up',new_user_user_registration_path,class: 'fas fa-user-plus nav-link text-light' %></li>

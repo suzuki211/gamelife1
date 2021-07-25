@@ -3,7 +3,8 @@
     <tr>
       <th class="col-sm-2"></th>
       <th class="col-sm-2">Title</th>
-      <th class="col-sm-4">impressions</th>
+      <th class="col-sm-2">hyouka</th>
+      <th class="col-sm-3">genre</th>
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -16,7 +17,8 @@
           <% end %>
         </td>
         <td><%= link_to game.title, user_game_path(game.id), class: "game_#{game.id}" %></td>
-        <td><%= game.impressions %></td>
+        <td class="game-evaluation" data-score="<%= game.evaluation %>"></td>
+        <td><%= game.genre.name %></td>
         <td id="favorite_<%= game.id %>">
           <%= render 'user/games/favorite', game: game %>
         </td>
@@ -25,3 +27,12 @@
     <% end %>
   </tbody>
 </table>
+<script>
+ $('.game-evaluation').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>

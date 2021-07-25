@@ -24,11 +24,12 @@
             </td>
             <td class="title"><%= link_to @game.title, user_game_path(@game) %></td>
             <td class="impressions"><%= @game.impressions %></td>
+            <td class="game-evaluation" data-score="<%= @game.evaluation %>"></td>
             <td id="favorite_<%= @game.id %>">
               <%= render 'favorite', game: @game %>
             </td>
             <td>
-              aaa
+              <%= link_to '編集', edit_user_game_path(@game), data: {'turbolinks' => false}, class: "btn btn-sm btn-danger edit_game_#{@game.id}" %>
             </td>
             <td>
               <% if @game.user == current_user_user %>
@@ -53,3 +54,12 @@
     </div>
   </div>
 </div>
+<script>
+ $('.game-evaluation').raty({
+    readOnly: true,
+    score: function() {
+      return $(this).attr('data-score');
+    },
+    path: '/assets/'
+  });
+</script>

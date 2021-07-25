@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       registrations: 'user/users/registrations',
       passwords: 'user/users/passwords'
     }
-    resources :games do
+    resources :games, only: [:new, :create, :index, :show, :edit, :destroy, :update] do
       resources :game_comments, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
@@ -26,6 +26,7 @@ Rails.application.routes.draw do
       get 'followings' => 'relationships#followings', as: 'followings'
       get 'followers' => 'relationships#followers', as: 'followers'
     end
+    get "search" => "searches#search"
   end
   root to: 'homes#top'
   get  "home/about" => 'homes#about'

@@ -1,4 +1,4 @@
-<!--ユーザー側投稿ページ-->
+<!--ユーザー側投稿編集ページ-->
 
 <div class='container my-5'>
 
@@ -13,7 +13,7 @@
   <div class='row'>
     <div class='col-md-10 offset-md-1'>
 
-      <%= form_with model: @game, url: user_games_path(@game.id), local:true do |f| %>
+      <%= form_with model:@game, url: user_game_path(@game.id), local:true do |f| %>
       <table class='table table-borderless'>
 
         <tr>
@@ -59,7 +59,7 @@
         <tr>
           <div class='form-group'>
             <th></th>
-              <td><%= f.submit '新規登録', class: 'btn btn-primary w-50' %></td>
+              <td><%= f.submit '編集を保存する', class: 'btn btn-primary w-50' %></td>
           </div>
         </tr>
 

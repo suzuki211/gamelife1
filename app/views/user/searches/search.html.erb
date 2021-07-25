@@ -1,0 +1,34 @@
+<h2>検索結果</h2>
+<table class="table table-hover table-inverse">
+  <% if @range == "UserName" %>
+    <tbody>
+      <% if @users.empty? %>
+        <h2>該当するユーザーはいません</h2>
+      <% else %>
+        <% @users.each do |user| %>
+          <tr>
+            <td><%= user.name %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% elsif @range == "GameTitle" %>
+    <tbody>
+      <% if @games.empty? %>
+        <h2>該当するタイトルはありません</h2>
+      <% else %>
+        <% @games.each do |game| %>
+          <tr>
+            <td>
+              <%= link_to user_game_path(game.id) do %>
+                <%= attachment_image_tag game, :image, :fill, 100, 100, format: 'jpeg', fallback: "no_image.jpg" %>
+              <% end %>
+            </td>
+            <td><%= link_to game.title, user_game_path(game.id), class: "game_#{game.id}" %></td>
+            <td><%= game.genre.name %></td>
+          </tr>
+        <% end %>
+      <% end %>
+    </tbody>
+  <% end %>
+</table>
