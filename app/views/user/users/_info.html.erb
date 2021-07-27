@@ -1,34 +1,58 @@
-<table class='table'>
-  <tr><%= attachment_image_tag(user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg") %></tr>
-  <tr>
-	  <th>name</th>
-	  <th><%= user.name %></th>
-  </tr>
-  <tr>
-	  <th>introduction</th>
-	  <th></th>
-  </tr>
-<tr>
-    <th>follows</th>
-    <th><%= link_to user.followings.count, user_user_followings_path(user.id) %></th>
-  </tr>
-  <tr>
-    <th>followers</th>
-    <th><%= link_to user.followers.count, user_user_followers_path(user.id) %></th>
-  </tr>
-  <tr>
-    <th>
-      <% unless current_user_user == user %>
-        <% if current_user_user.following?(user) %>
-          <%= link_to "Unfollow", user_user_relationships_path(user.id), method: :delete %>
-        <% else %>
-          <%= link_to "Follow", user_user_relationships_path(user.id), method: :post %>
-        <% end %>
-      <% end %>
-    </th>
-    <th> </th>
-  </tr>
-</table>
-<div class='row'>
-  <%= link_to '',edit_user_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
+<!--顧客側商品詳細ページ-->
+
+<div class='container my-5'>
+
+  <div class='row'>
+
+  	<!--商品画像-->
+		<div class='col-sm-5'>
+      <%= attachment_image_tag(user, :profile_image, size: '300x300', fallback: "no_image.jpg") %>
+    </div>
+
+    <div class='col-sm-7 pt-5'>
+    	<table class='table'>
+
+    	  <tr>
+					<th class='col-xs-4'>name</th>
+					<td class='product col-xs-7'><%= user.name %></td>
+				</tr>
+
+ 				<tr>
+					<th class='col-xs-4'>introduction</th>
+					<td class='product col-xs-7'></td>
+				</tr>
+
+				<tr>
+					<th class='col-xs-4'>follows</th>
+					<td class='product col-xs-7'><%= link_to user.followings.count, user_user_followings_path(user.id) %></td>
+				</tr>
+
+				<tr>
+					<th class='col-xs-4'>followers</th>
+					<td class='product col-xs-7'><%= link_to user.followers.count, user_user_followers_path(user.id) %></td>
+				</tr>
+
+				<tr class='table-borderless'>
+					<th class='col-xs-4'>
+            <% unless current_user_user == user %>
+              <% if current_user_user.following?(user) %>
+                <%= link_to "Unfollow", user_user_relationships_path(user.id), method: :delete %>
+              <% else %>
+                <%= link_to "Follow", user_user_relationships_path(user.id), method: :post %>
+              <% end %>
+            <% end %>
+          </th>
+				</tr>
+
+				<tr class='table-borderless'>
+          <th>
+            <% if user == current_user_user %>
+              <%= link_to '',edit_user_user_path(user),class: "btn btn-outline-secondary btn-block fas fa-user-cog edit_user_#{user.id}" %>
+            <% end %>
+          </th>
+        </tr>
+
+      </table>
+    </div>
+  </div>
 </div>

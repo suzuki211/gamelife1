@@ -27,6 +27,7 @@
           <li><%= link_to ' Mypage', user_user_path(current_user_user.id),class: 'fas fa-home nav-link text-light' %></li>
           <li><%= link_to ' Users', user_users_path,class: 'fas fa-users nav-link text-light' %></li>
           <li><%= link_to ' Games', user_games_path ,class: 'fas fa-book-open nav-link text-light'%></li>
+          <li><%= link_to ' New', new_user_game_path ,class: 'fas fa-book-open nav-link text-light'%></li>
           <li><%= link_to ' logout', destroy_user_user_session_path, method: :delete, class: 'fas fa-sign-out-alt nav-link text-light' %></li>
         <% else %><!--未ログイン時のヘッタ―-->
           <!--各機能へのリンク-->
