@@ -27,8 +27,8 @@ footer {
   width: 100%;
   position: fixed;
   bottom: 0;
+}
 
-  font-family: 'Caveat', cursive;
-  -webkit-text-size-adjust: 100%;
-      -ms-text-size-adjust: 100%;
+.push {
+  height: 50px;/*フッターと同じ高さに指定*/
 }

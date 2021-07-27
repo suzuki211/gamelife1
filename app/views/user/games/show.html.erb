@@ -1,26 +1,24 @@
-<div class='container'>
+<div class='container px-5 px-sm-0'>
   <div class='row'>
-    <div class='col-md-3'>
+    <div class='col-md-12'>
       <h2>User info</h2>
       <%= render 'user/users/info', user: @game.user %>
     </div>
-    <div class='col-md-8 offset-md-1'>
+    <div class='col-md-12'>
       <table>
         <thead>
-          <tr><h2>Game detail</h2></tr>
           <tr>
-            <div>
+            <td><h2>Game detail</h2></td>
+            <td>
               <% if @game.user == current_user_user %>
                 <%= link_to '編集', edit_user_game_path(@game), data: {'turbolinks' => false}, class: "btn btn-sm btn-danger edit_game_#{@game.id}" %>
               <% end %>
-            </div>
-          </tr>
-          <tr>
-            <div>
+            </td>
+            <td>
               <% if @game.user == current_user_user %>
                 <%= link_to "削除", user_game_path(@game), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_game_#{@game.id}" %>
               <% end %>
-            </div>
+            </td>
           </tr>
         </thead>
       </table>
@@ -61,6 +59,7 @@
           <%= f.submit "送信する" %>
         <% end %>
       </div>
+      <div class="push"></div><!--フッター固定用-->
     </div>
   </div>
 </div>

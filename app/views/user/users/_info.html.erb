@@ -1,37 +1,42 @@
-<!--顧客側商品詳細ページ-->
+<!--ユーザー情報ページ-->
 
 <div class='container my-5'>
 
   <div class='row'>
 
-  	<!--商品画像-->
+  	<!--ユーザー画像-->
 		<div class='col-sm-5'>
-      <%= attachment_image_tag(user, :profile_image, size: '300x300', fallback: "no_image.jpg") %>
+      <%= attachment_image_tag(user, :profile_image, size: '250x250', fallback: "no_image.jpg") %>
     </div>
 
-    <div class='col-sm-7 pt-5'>
+    <div class='col-sm-7'>
     	<table class='table'>
 
+    	  <!--ユーザー名-->
     	  <tr>
 					<th class='col-xs-4'>name</th>
 					<td class='product col-xs-7'><%= user.name %></td>
 				</tr>
 
+				<!--ユーザー説明-->
  				<tr>
 					<th class='col-xs-4'>introduction</th>
 					<td class='product col-xs-7'></td>
 				</tr>
 
+				<!--フォロー-->
 				<tr>
 					<th class='col-xs-4'>follows</th>
 					<td class='product col-xs-7'><%= link_to user.followings.count, user_user_followings_path(user.id) %></td>
 				</tr>
 
+				<!--フォロワー-->
 				<tr>
 					<th class='col-xs-4'>followers</th>
 					<td class='product col-xs-7'><%= link_to user.followers.count, user_user_followers_path(user.id) %></td>
 				</tr>
 
+				<!--フォロー機能-->
 				<tr class='table-borderless'>
 					<th class='col-xs-4'>
             <% unless current_user_user == user %>
@@ -44,6 +49,7 @@
           </th>
 				</tr>
 
+				<!--ユーザー情報編集-->
 				<tr class='table-borderless'>
           <th>
             <% if user == current_user_user %>
