@@ -28,7 +28,13 @@
 
 ER 図
 https://app.diagrams.net/#G1vo-ufAbATfMXoHyBtCiCWsOjRBzhUfLa
-（設計書ができていないため、作成後追記予定）
+
+詳細設計書
+https://docs.google.com/spreadsheets/d/1oP8YeNs2WhqBBhUIVV_IQd6wCGfpv_PDk7-tMG-jeTQ/edit#gid=0
+
+WBS
+https://docs.google.com/spreadsheets/d/18F_Zz7O9x9lxLPARo2CrsoSKGpJrsIl5rcMy0dAN7Uo/edit#gid=977420151
+
 
 ## チャレンジ要素一覧
 
