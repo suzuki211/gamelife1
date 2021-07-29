@@ -18,8 +18,6 @@ class Game < ApplicationRecord
       @game = Game.where("title LIKE?","#{word}")
     elsif search == "forward_match"
       @game = Game.where("title LIKE?","#{word}%")
-    elsif search == "backward_match"
-      @game = Game.where("title LIKE?","%#{word}")
     elsif search == "partial_match"
       @game = Game.where("title LIKE?","%#{word}%")
     else
