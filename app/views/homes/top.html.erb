@@ -4,11 +4,12 @@
   <div class='row'>
     <div class='col align-self-center'>
 
-　　　<h2 class='text-center'>ようこそ</h2>
+　　　<h2 class='text-center'>ようこそGamelifeへ！</h2>
       <p class='text-center'
-        このサイトは、。<br>
-        なにかあとで、<br>
-        コメントいれます。<br>
+        このサイトは、<br>
+        デジタルゲームからボードゲームまで、<br>
+        新たなゲームや同好の士を探すサイトです。<br>
+        あなたもまだ見ぬゲームを探してみたください。<br>
       </p>
 
       <!--サンプルで画像入れました-->
@@ -21,16 +22,16 @@
         </ol>
         <div class='carousel-inner'>
           <div class='carousel-item active'>
-            <%= image_tag 'no_image.jpg', width: '570px', height: '370px' %>
+            <%= image_tag 'game5.jpg', width: '570px', height: '370px' %>
           </div>
           <div class='carousel-item'>
-            <%= image_tag 'no_image.jpg', width: '570px', height: '370px' %>
+            <%= image_tag 'game2.jpg', width: '570px', height: '370px' %>
           </div>
           <div class='carousel-item'>
-            <%= image_tag 'no_image.jpg', width: '570px', height: '370px' %>
+            <%= image_tag 'game3.jpg', width: '570px', height: '370px' %>
           </div>
           <div class='carousel-item'>
-            <%= image_tag 'no_image.jpg', width: '570px', height: '370px' %>
+            <%= image_tag 'game4.jpg', width: '570px', height: '370px' %>
           </div>
         </div>
         <a class='carousel-control-prev' href='#carouselExampleIndicators' role='button' data-slide='prev'>
@@ -65,9 +66,8 @@
                 <h6 class='card-title'>
                   <%= game.title %>
                 </h6>
-                <p class='card-text'>
-                  あとで
-                </p>
+                <p><%= game.genre.name %></td>
+                <p class="game-evaluation" data-score="<%= game.evaluation %>"></p>
               </div>
             <% end %>
           </div>
@@ -75,10 +75,18 @@
       <% end %>
     </div>
   </div>
+  <script>
+   $('.game-evaluation').raty({
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    readOnly: true,
+    });
+  </script>
 
   <div style='text-align: right;'>
     <u>
-      <%= link_to '全ての商品を見る >', user_games_path %>
+      <%= link_to '投稿一覧 >', user_games_path %>
     </u>
   </div>
 
