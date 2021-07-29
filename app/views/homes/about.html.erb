@@ -3,3 +3,57 @@
     <h1 class="px-3 mx-auto">Welcome to <i class="fas fa-book"></i><strong>Gamelife</strong>!</h1>
   </div>
 </div>
+<!--Aboutページ-->
+
+<div class='container my-5'>
+  <div class='row'>
+    <div class='col align-self-center'>
+
+      <h1 class='text-center'>About</h1>
+
+      <p class='text-center'><strong>
+      Gamelifeすべてのゲーム好きのためサイトです。<br>
+      ボードゲームからテレビゲームまたスマホゲームといった様々なゲームのレビューを行うことができます。<br>
+      また、レビューを行うだけではなく見ることによって新たなゲームや仲間を見つけることができます。<br>
+      <br>
+      ぜひご活用ください。<br>
+      </strong></p>
+
+      <div id='carouselExampleIndicators' class='carousel slide text-center' data-ride='carousel'>
+
+        <ol class='carousel-indicators'>
+          <li data-target='#carouselExampleIndicators' data-slide-to='0' class='active'></li>
+          <li data-target='#carouselExampleIndicators' data-slide-to='1'></li>
+          <li data-target='#carouselExampleIndicators' data-slide-to='2'></li>
+        </ol>
+
+        <div class='carousel-inner'>
+          <div class='carousel-item active'>
+            <%= image_tag 'game1.jpeg', width: '570px', height: '370px' %>
+          </div>
+          <div class='carousel-item'>
+            <%= image_tag 'game2.jpg', width: '570px', height: '370px' %>
+          </div>
+          <div class='carousel-item'>
+            <%= image_tag 'game3.jpeg', width: '570px', height: '370px' %>
+          </div>
+        </div>
+
+        <a class='carousel-control-prev' href='#carouselExampleIndicators' role='button' data-slide='prev'>
+          <span class='carousel-control-prev-icon' aria-hidden='true'></span>
+          <span class='sr-only'>Previous</span>
+        </a>
+        <a class='carousel-control-next' href='#carouselExampleIndicators' role='button' data-slide='next'>
+          <span class='carousel-control-next-icon' aria-hidden='true'></span>
+          <span class='sr-only'>Next</span>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+
+  <!--3つ丸-->
+  <div class='mickey'></div>
+
+</div>

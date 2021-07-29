@@ -10,8 +10,14 @@ class User::GamesController < ApplicationController
   def create
     @game = Game.new(game_params)
     @game.user_id = current_user_user.id
-    @game.save
-    redirect_to user_games_path
+   if @game.save
+      flash[:notice] = '投稿に成功しました.'
+      redirect_to user_game_path(@game.id)
+   else
+      @games = Game.all
+      @genres = Genre.all
+      render :new
+   end
   end
 
   def index
@@ -26,6 +32,11 @@ class User::GamesController < ApplicationController
   def edit
     @game = Game.find(params[:id])
     @genres = Genre.all
+    if @game.user == current_user_user
+      render "edit"
+    else
+      redirect_to user_games_path
+    end
   end
 
   def destroy
@@ -36,8 +47,14 @@ class User::GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
-    @game.update(game_params)
-    redirect_to user_game_path(@game.id)
+    if @game.update(game_params)
+      redirect_to user_game_path(@game.id)
+      flash[:notice] = '編集に成功しました.'
+    else
+      @games = Game.all
+      @genres = Genre.all
+      render :edit
+    end
   end
 
 

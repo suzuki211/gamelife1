@@ -1,12 +1,19 @@
 <% @game.game_comments.each do |game_comment| %>
   <% unless game_comment.id.nil? %>
-    <%= attachment_image_tag(game_comment.user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg") %>
-      <%= game_comment.user.name %>
-      <%= game_comment.created_at.strftime('%Y/%m/%d') %><%= game_comment.comment %>
-      <% if game_comment.user == current_user_user %>
-        <div class="comment-delete">
-          <%= link_to "Destroy", user_game_game_comment_path(game_comment.game, game_comment), method: :delete, remote: true %>
+    <tr>
+      <td class='col-xs-3'><%= attachment_image_tag(game_comment.user, :profile_image, :fill, 100, 100, fallback: "no_image.jpg") %></td>
+      <td class='col-xs-4'>
+        <%= game_comment.user.name %>
+        <%= game_comment.created_at.strftime('%Y/%m/%d') %>
+        <div>
+          <%= game_comment.comment %>
         </div>
-    <% end %>
+        <% if game_comment.user == current_user_user %>
+          <div class="comment-delete">
+            <%= link_to "Destroy", user_game_game_comment_path(game_comment.game, game_comment), method: :delete, remote: true %>
+          </div>
+        <% end %>
+      </td>
+    </tr>
   <% end %>
 <% end %>

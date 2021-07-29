@@ -5,6 +5,10 @@ class Game < ApplicationRecord
   attachment :image
   has_many :favorites, dependent: :destroy
 
+  validates :title, presence: true
+  validates :impressions, presence: true
+  validates :evaluation, presence: true
+
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end

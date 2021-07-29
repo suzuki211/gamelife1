@@ -1,74 +1,96 @@
+<p id="notice"><%= notice %></p>
 <div class='container px-5 px-sm-0'>
   <div class='row'>
-    <div class='col-md-12'>
-      <h2>User info</h2>
-      <%= render 'user/users/info', user: @game.user %>
+    <div class='col-md-3'>
+        <h4 class='bg-dark text-white text-center p-3'> ユーザー情報</h4>
     </div>
     <div class='col-md-12'>
-      <table>
-        <thead>
-          <tr>
-            <td><h2>Game detail</h2></td>
-            <td>
-              <% if @game.user == current_user_user %>
-                <%= link_to '編集', edit_user_game_path(@game), data: {'turbolinks' => false}, class: "btn btn-sm btn-danger edit_game_#{@game.id}" %>
-              <% end %>
-            </td>
-            <td>
-              <% if @game.user == current_user_user %>
-                <%= link_to "削除", user_game_path(@game), method: :delete, data: { confirm: '本当に消しますか？' }, class: "btn btn-sm btn-danger destroy_game_#{@game.id}" %>
-              <% end %>
-            </td>
-          </tr>
-        </thead>
-      </table>
-  		<table class='table'>
-  		  <thead>
-          <tr>
-            <th class="col-sm-2"></th>
-            <th class="col-sm-3">Title</th>
-            <th class="col-sm-4">impressions</th>
-            <th colspan="3"></th>
-          </tr>
-        </thead>
-        <tbody>
-  		    <tr>
-  		      <td>
-  		        <%= link_to user_user_path(@game.user) do %>
-                <%= attachment_image_tag(@game, :image, :fill, 100, 100, fallback: "no_image.jpg") %><br>
-              <% end %>
-            </td>
-            <td class="title"><%= link_to @game.title, user_game_path(@game) %></td>
-            <td class="impressions"><%= @game.impressions %></td>
-            <td class="game-evaluation" data-score="<%= @game.evaluation %>"></td>
-            <td id="favorite_<%= @game.id %>">
-              <%= render 'favorite', game: @game %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div id="comments_area">
-        <div class="comments">
-          <p>コメント件数：<%= @game.game_comments.count %></p>
-          <%= render 'comment', locals: { comments: @game.game_comments} %>
+      <%= render 'user/users/info', user: @game.user %>
+    </div>
+  </div>
+  <!--ユーザーゲーム詳細ページ-->
+  <div class='container my-5'>
+    <div class='col-md-3'>
+        <h4 class='bg-dark text-white text-center p-3'> ゲームレビュー</h4>
+    </div>
+    <div class='row'>
+  	  <!--ゲーム画像-->
+		  <div class='col-sm-5'>
+        <%= attachment_image_tag(@game, :image, size: '300x220', fallback: 'no_image.jpg') %>
+      </div>
+      <div class='col-sm-7'>
+    	  <table class='table table-borderless'>
+
+    	    <tbody>
+    	      <tr>
+					    <th style='border-top: none;' class='col-xs-3'>タイトル</th>
+					    <td style='border-top: none; ' class='col-xs-4'><%= @game.title %></td>
+				    </tr>
+
+				    <tr>
+					    <th style='border-top: none;' class='col-xs-3'>ジャンル</th>
+					    <td style='border-top: none;' class='col-xs-4'><%= @game.genre.name %></td>
+				    </tr>
+
+				    <tr>
+					    <th style='border-top: none;' class='col-xs-3'>評価</th>
+					    <td style='border-top: none;' class='game-evaluation col-xs-4' data-score='<%= @game.evaluation %>'></td>
+				    </tr>
+
+  				  <tr>
+					    <th style='border-top: none;' class='col-xs-3'>感想</th>
+				  	  <td style='border-top: none;' class='col-xs-4'><%= @game.impressions %></td>
+				    </tr>
+
+			  	  <tr>
+				  	  <th style='border-top: none;'>いいね</th>
+					    <td id="favorite_<%= @game.id %>">
+                <%= render 'favorite', game: @game %>
+              </td>
+				    </tr>
+
+			      <tr>
+				      <td style='border-top: none;'>
+				        <% if @game.user == current_user_user %>
+				          <%= link_to '編集する', edit_user_game_path(@game), data: {'turbolinks' => false}, class: 'glyphicon glyphicon-pencil btn btn-success pull-right edit_game_#{@game.id}' %>
+				        <% end %>
+				      </td>
+              <td style='border-top: none;'>
+                <% if @game.user == current_user_user %>
+                  <%= link_to '削除する', user_game_path(@game), method: :delete, data: { confirm: '本当に消しますか？' }, class: 'glyphicon glyphicon-pencil btn btn-danger pull-right destroy_game_#{@game.id}'%>
+                <% end %>
+              </td>
+				    </tr>
+    	    </tbody>
+
+
+    	  </table>
+    	   <div id="comments_area">
+          <div class="comments">
+            <p>コメント件数：<%= @game.game_comments.count %></p>
+            <table>
+              <tbody>
+                <%= render 'comment', locals: { comments: @game.game_comments} %>
+              </tbody>
+            </table>
+          </div>
         </div>
+        <div class="new-comment">
+          <%= form_with model:[@game, @game_comment], url: user_game_game_comments_path(@game.id), remote: true do |f| %>
+            <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+            <%= f.submit "送信する" %>
+          <% end %>
+        </div>
+        <div class="push"></div><!--フッター固定用-->
       </div>
-      <div class="new-comment">
-        <%= form_with model:[@game, @game_comment], url: user_game_game_comments_path(@game.id), remote: true do |f| %>
-          <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-          <%= f.submit "送信する" %>
-        <% end %>
-      </div>
-      <div class="push"></div><!--フッター固定用-->
     </div>
   </div>
 </div>
 <script>
  $('.game-evaluation').raty({
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
     readOnly: true,
-    score: function() {
-      return $(this).attr('data-score');
-    },
-    path: '/assets/'
   });
 </script>

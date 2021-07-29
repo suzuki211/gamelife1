@@ -1,7 +1,14 @@
 <!--ユーザー側投稿ページ-->
 
 <div class='container my-5'>
-
+  <% if @game.errors.any? %>
+    <%= @game.errors.count %>error prohibited this game from being saved:
+    <% @game.errors.full_messages.each do |message| %>
+      <ul class="error_explanation">
+        <li><%= message %></li>
+      </ul>
+    <% end %>
+  <% end %>
   <div class='row mb-3'>
     <div class='col-md-3 offset-md-1'>
 

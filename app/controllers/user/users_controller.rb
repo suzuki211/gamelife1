@@ -20,12 +20,16 @@ class User::UsersController < ApplicationController
   #ユーザー情報更新
   def update
     @user = User.find(params[:id])
-    @user.update(user_params)
-    redirect_to user_user_path(@user.id)
+    if @user.update(user_params)
+      redirect_to user_user_path(@user.id)
+      flash[:notice] = '編集に成功しました.'
+    else
+      render :edit
+    end
   end
 
   def user_params
-    params.require(:user).permit(:name, :profile_image)
+    params.require(:user).permit(:name, :introduction, :profile_image)
   end
 
 
