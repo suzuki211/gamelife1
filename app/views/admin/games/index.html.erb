@@ -1,0 +1,15 @@
+<!--投稿一覧ページ-->
+<div class='container my-5'>
+  <p id="notice"><%= notice %></p>
+  <div class='row mb-3'>
+    <div class='col-md-3 offset-md-1'>
+      <h4 class='bg-dark text-white text-center p-3'> ゲームレビュー</h4>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-md-12'>
+      <%= render 'index',games: @games %>
+    </div>
+  </div>
+  <div class="push"></div><!--フッター固定用-->
+</div>

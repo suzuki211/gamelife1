@@ -1,0 +1,77 @@
+<!--検索結果ページ-->
+<div class='container my-5'>
+  <div class='row mb-3'>
+    <div class='col-md-3 offset-md-1'>
+      <h4 class='bg-dark text-white text-center p-3'>検索結果</h4>
+    </div>
+  </div>
+  <div class='row'>
+    <div class='col-md-12'>
+      <table class="table table-hover table-inverse">
+        <% if @range == "UserName" %>
+          <% if @users.empty? %>
+            <h2>該当するユーザーはいません</h2>
+          <% else %>
+            <thead class='thead-dark'>
+              <tr>
+                <th>image</th>
+                <th>name</th>
+                <th>follows</th>
+                <th>followers</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @users.each do |user| %>
+                <tr>
+                  <td><%= attachment_image_tag(user, :profile_image, size: '100x100', fallback: 'no_image.jpg') %></td>
+                  <td><%= user.name %></td>
+                  <td><%= link_to user.followings.count, user_user_followings_path(user.id) %></td>
+                  <td><%= link_to user.followers.count, user_user_followers_path(user.id) %></td>
+                  <td><%= link_to 'Show', admin_user_path(user), class: "user_#{user.id}" %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          <% end %>
+        <% elsif @range == "GameTitle" %>
+          <% if @games.empty? %>
+            <h2>該当するタイトルはありません</h2>
+          <% else %>
+            <thead class='thead-dark'>
+              <tr>
+                <th class='text-center col-md-3'>ゲーム画像</th>
+                <th class='text-center col-md-2'>タイトル</th>
+                <th class='text-center col-md-3'>評価</th>
+                <th class='text-center col-md-2'>ジャンル</th>
+                <th class='text-center col-md-1'>いいね</th>
+                <th class='text-center col-md-1'>コメント</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @games.each do |game| %>
+                <tr>
+                  <td id='img_field'>
+                    <%= link_to admin_game_path(game.id) do %>
+                      <%= attachment_image_tag(game, :image, size: '250x250', fallback: 'no_image.jpg') %>
+                    <% end %>
+                  </td>
+                  <td class='text-center'>
+                    <%= link_to admin_game_path(game.id), class: 'btn-link' do %>
+                      <%= game.title %>
+                    <% end %>
+                  </td>
+                  <td class="game-evaluation text-center" data-score="<%= game.evaluation %>"></td>
+                  <td class='text-center'><%= game.genre.name %></td>
+                  <td class="text-center" id="favorite_<%= game.id %>">
+                    <%= render 'user/games/favorite', game: game %>
+                  </td>
+                  <td class="text-center"><%= link_to "#{game.game_comments.count} ", user_game_path(game.id) %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          <% end %>
+        <% end %>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<p id="notice"><%= notice %></p>
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3'>
+        <h4 class='bg-dark text-white text-center p-3'> ユーザー情報</h4>
+    </div>
+    <div class='col-md-12'>
+      <%= render 'admin/users/info', user: @game.user %>
+    </div>
+  </div>
+  <!--ユーザーゲーム詳細ページ-->
+  <div class='container my-5'>
+    <div class='col-md-3'>
+      <h4 class='bg-dark text-white text-center p-3'> ゲームレビュー</h4>
+    </div>
+    <div class='row'>
+  	  <!--ゲーム画像-->
+		  <div class='col-sm-5'>
+        <%= attachment_image_tag(@game, :image, size: '300x220', fallback: 'no_image.jpg') %>
+      </div>
+      <div class='col-sm-7'>
+    	  <table class='table table-borderless'>
+
+    	    <tbody>
+    	      <!--タイトル-->
+    	      <tr>
+					    <th style='border-top: none;' class='col-xs-3'>タイトル</th>
+					    <td style='border-top: none; ' class='col-xs-4'><%= @game.title %></td>
+				    </tr>
+				    <!--ジャンル-->
+				    <tr>
+					    <th style='border-top: none;' class='col-xs-3'>ジャンル</th>
+					    <td style='border-top: none;' class='col-xs-4'><%= @game.genre.name %></td>
+				    </tr>
+				    <!--評価-->
+				    <tr>
+					    <th style='border-top: none;' class='col-xs-3'>評価</th>
+					    <td style='border-top: none;' class='game-evaluation col-xs-4' data-score='<%= @game.evaluation %>'></td>
+				    </tr>
+				    <!--感想-->
+  				  <tr>
+					    <th style='border-top: none;' class='col-xs-3'>感想</th>
+				  	  <td style='border-top: none;' class='col-xs-4'><%= @game.impressions %></td>
+				    </tr>
+				    <!--いいね-->
+			  	  <tr>
+				  	  <th style='border-top: none;'>いいね</th>
+					    <td id="favorite_<%= @game.id %>">
+                <%= render 'favorite', game: @game %>
+              </td>
+				    </tr>
+				    <!--削除機能-->
+			      <tr>
+              <td style='border-top: none;'>
+                <%= link_to '削除する', admin_game_path(@game), method: :delete, data: { confirm: '本当に消しますか？' }, class: 'glyphicon glyphicon-pencil btn btn-danger pull-right destroy_game_#{@game.id}'%>
+              </td>
+				    </tr>
+    	    </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div id="comments_area">
+    <div class="comments">
+      <%= render 'comment', locals: { comments: @game.game_comments} %>
+    </div>
+  </div>
+</div>
+<div class="push"></div><!--フッター固定用-->
+<!--評価用画像等-->
+<script>
+ $('.game-evaluation').raty({
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn : '<%= asset_path('star-on.png') %>',
+    starHalf: '<%= asset_path('star-half.png') %>',
+    readOnly: true,
+  });
+</script>

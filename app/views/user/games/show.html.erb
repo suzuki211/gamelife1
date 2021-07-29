@@ -22,33 +22,34 @@
     	  <table class='table table-borderless'>
 
     	    <tbody>
+    	      <!--タイトル-->
     	      <tr>
 					    <th style='border-top: none;' class='col-xs-3'>タイトル</th>
 					    <td style='border-top: none; ' class='col-xs-4'><%= @game.title %></td>
 				    </tr>
-
+				    <!--ジャンル-->
 				    <tr>
 					    <th style='border-top: none;' class='col-xs-3'>ジャンル</th>
 					    <td style='border-top: none;' class='col-xs-4'><%= @game.genre.name %></td>
 				    </tr>
-
+				    <!--評価-->
 				    <tr>
 					    <th style='border-top: none;' class='col-xs-3'>評価</th>
 					    <td style='border-top: none;' class='game-evaluation col-xs-4' data-score='<%= @game.evaluation %>'></td>
 				    </tr>
-
+				    <!--感想-->
   				  <tr>
 					    <th style='border-top: none;' class='col-xs-3'>感想</th>
 				  	  <td style='border-top: none;' class='col-xs-4'><%= @game.impressions %></td>
 				    </tr>
-
+				    <!--いいね-->
 			  	  <tr>
 				  	  <th style='border-top: none;'>いいね</th>
 					    <td id="favorite_<%= @game.id %>">
                 <%= render 'favorite', game: @game %>
               </td>
 				    </tr>
-
+				    <!--編集,削除機能-->
 			      <tr>
 				      <td style='border-top: none;'>
 				        <% if @game.user == current_user_user %>
@@ -62,30 +63,25 @@
               </td>
 				    </tr>
     	    </tbody>
-
-
     	  </table>
-    	   <div id="comments_area">
-          <div class="comments">
-            <p>コメント件数：<%= @game.game_comments.count %></p>
-            <table>
-              <tbody>
-                <%= render 'comment', locals: { comments: @game.game_comments} %>
-              </tbody>
-            </table>
-          </div>
-        </div>
-        <div class="new-comment">
-          <%= form_with model:[@game, @game_comment], url: user_game_game_comments_path(@game.id), remote: true do |f| %>
-            <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
-            <%= f.submit "送信する" %>
-          <% end %>
-        </div>
-        <div class="push"></div><!--フッター固定用-->
       </div>
     </div>
   </div>
+  <!--コメント機能-->
+  <div id="comments_area">
+    <div class="comments">
+      <%= render 'comment', locals: { comments: @game.game_comments} %>
+    </div>
+  </div>
+  <div class="new-comment">
+    <%= form_with model:[@game, @game_comment], url: user_game_game_comments_path(@game.id), remote: true do |f| %>
+      <%= f.text_area :comment, rows:'5',placeholder: "コメントをここに" %>
+      <%= f.submit "送信する" %>
+    <% end %>
+  </div>
 </div>
+<div class="push"></div><!--フッター固定用-->
+<!--評価用画像等-->
 <script>
  $('.game-evaluation').raty({
     starOff:  '<%= asset_path('star-off.png') %>',

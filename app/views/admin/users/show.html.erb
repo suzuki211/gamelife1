@@ -1,0 +1,21 @@
+<!--ユーザー詳細ページ-->
+<p id="notice"><%= notice %></p>
+<div class='container px-5 px-sm-0'>
+  <div class='row'>
+    <div class='col-md-3 offset-md-1'>
+      <h4 class='bg-dark text-white text-center p-3'> ユーザー情報</h4>
+    </div>
+    <!--ユーザー詳細-->
+    <div class='col-md-12'>
+      <%= render 'info', user: @user %>
+    </div>
+    <!--ユーザー投稿一覧-->
+    <div class='col-md-3 offset-md-1'>
+      <h4 class='bg-dark text-white text-center p-3'> 投稿一覧</h4>
+    </div>
+    <div class='col-md-12'>
+      <%= render 'admin/games/index',games: @games %>
+    </div>
+  </div>
+  <div class="push"></div><!--フッター固定用-->
+</div>

@@ -1,0 +1,79 @@
+<!--管理者側投稿編集ページ-->
+
+<div class='container my-5'>
+  <% if @game.errors.any? %>
+    <%= @game.errors.count %>error prohibited this game from being saved:
+    <% @game.errors.full_messages.each do |message| %>
+      <ul class="error_explanation">
+        <li><%= message %></li>
+      </ul>
+    <% end %>
+  <% end %>
+  <div class='row mb-3'>
+    <div class='col-md-3 offset-md-1'>
+
+      <p id="notice"><%= notice %></p>
+      <h4 class='bg-dark text-white text-center p-3'>新規レビュー</h4>
+
+    </div>
+  </div>
+
+  <div class='row'>
+    <div class='col-md-10 offset-md-1'>
+
+      <%= form_with model:@game, url: user_game_path(@game.id), local:true do |f| %>
+      <table class='table table-borderless'>
+
+        <tr>
+          <div class='form-group'>
+            <th>ゲーム画像</th>
+              <td><%= f.attachment_field :image %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>ゲームタイトル</th>
+              <td><%= f.text_field :title, class: 'col-sm-6 form-control-static name' %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>レビュー</th>
+              <td><%= f.text_area :impressions, class: 'col-sm-6 control-label introduction' %></td>
+          </div>
+        </tr>
+
+        <tr>
+          <div class='form-group'>
+            <th>ジャンル</th>
+              <td><%= f.collection_select(:genre_id, @genres, :id, :name, prompt: '-- 選択してください --', class: 'form-control col-sm-9 genre_id') %></td>
+          </div>
+        </tr>
+
+        <div id="evaluate_stars">
+          <label>評価</label>
+        </div>
+        <script>
+          $('#evaluate_stars').raty({
+            starOn: "<%= asset_path('star-on.png') %>",
+            starOff: "<%= asset_path('star-off.png') %>",
+            starHalf: "<%= asset_path('star-half.png') %>",
+            scoreName: 'game[evaluation]' //登録するモデル名とカラム名を記述
+          });
+        </script>
+
+        <tr>
+          <div class='form-group'>
+            <th></th>
+              <td><%= f.submit '編集を保存する', class: 'btn btn-primary w-50' %></td>
+          </div>
+        </tr>
+
+      </table>
+      <% end %>
+    </div>
+  </div>
+
+</div>

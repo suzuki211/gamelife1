@@ -1,0 +1,23 @@
+<!--ユーザー一覧部分テンプレート-->
+<table class='table text-center'>
+  <thead class='thead-dark'>
+    <tr>
+      <th>image</th>
+      <th>name</th>
+      <th>follows</th>
+      <th>followers</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+        <td><%= attachment_image_tag(user, :profile_image, size: '100x100', fallback: 'no_image.jpg') %></td>
+        <td><%= user.name %></td>
+        <td><%= link_to user.followings.count, user_user_followings_path(user.id) %></td>
+        <td><%= link_to user.followers.count, user_user_followers_path(user.id) %></td>
+        <td><%= link_to 'Show', admin_user_path(user), class: "user_#{user.id}" %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

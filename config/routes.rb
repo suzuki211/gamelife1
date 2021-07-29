@@ -1,14 +1,21 @@
 Rails.application.routes.draw do
-  namespace :user do
-    get 'users/show'
-  end
   namespace :admin do
     devise_for :admins, controllers: {
       sessions:      'admin/admins/sessions',
       passwords:     'admin/admins/passwords',
       registrations: 'admin/admins/registrations'
     }
+    resources :games, only: [:new, :create, :index, :show, :edit, :destroy, :update] do
+      resources :game_comments, only: [:create, :destroy]
+      resource :favorites, only: [:create, :destroy]
+    end
     resources :genres, only: [:index, :create, :edit, :update, :destroy]      #ジャンル
+    resources :users, only: [:index, :show, :edit, :update] do
+      resource :relationships, only: [:create, :destroy]
+      get 'followings' => 'relationships#followings', as: 'followings'
+      get 'followers' => 'relationships#followers', as: 'followers'
+    end
+    get "search" => "searches#search"
   end
 
   namespace :user do

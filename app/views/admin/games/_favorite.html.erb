@@ -1,0 +1,14 @@
+<!--いいね機能部分テンプレート-->
+<% if game.favorited_by?(current_admin_admin) %>
+    <p>
+      <%= link_to admin_game_favorites_path(game), method: :delete, remote: true do %>
+        ♥<%= game.favorites.count %>
+      <% end %>
+    </p>
+  <% else %>
+    <p>
+      <%= link_to admin_game_favorites_path(game), method: :post, remote: true do %>
+        ♡<%= game.favorites.count %>
+      <% end %>
+    </p>
+  <% end %>

@@ -1,3 +1,4 @@
+<!--いいね機能部分テンプレート-->
 <% if game.favorited_by?(current_user_user) %>
     <p>
       <%= link_to user_game_favorites_path(game), method: :delete, remote: true do %>
