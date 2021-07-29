@@ -14,33 +14,33 @@
 
     	  <!--ユーザー名-->
     	  <tr>
-					<th class='col-xs-3'>name</th>
-					<td class='col-xs-4'><%= user.name %></td>
+					<th class='col-sm-3'>name</th>
+					<td class='col-sm-6'><%= user.name %></td>
 				</tr>
 
 				<!--ユーザー説明-->
  				<tr>
-					<th class='col-xs-3'>introduction</th>
-					<td class='col-xs-4'><%= user.introduction %></td>
+					<th class='col-sm-3'>introduction</th>
+					<td class='col-sm-6'><%= user.introduction %></td>
 				</tr>
 
 				<!--フォロー-->
 				<tr>
-					<th class='col-xs-3'>follows</th>
-					<td class='col-xs-4'><%= link_to user.followings.count, admin_user_followings_path(user.id) %></td>
+					<th class='col-sm-3'>follows</th>
+					<td class='col-sm-6'><%= link_to user.followings.count, admin_user_followings_path(user.id) %></td>
 				</tr>
 
 				<!--フォロワー-->
 				<tr>
-					<th class='col-xs-3'>followers</th>
-					<td class='col-xs-4'><%= link_to user.followers.count, admin_user_followers_path(user.id) %></td>
+					<th class='col-sm-3'>followers</th>
+					<td class='col-sm-6'><%= link_to user.followers.count, admin_user_followers_path(user.id) %></td>
 				</tr>
 
 				<!--フォロー機能-->
 
 				<!--ユーザー情報編集-->
 				<tr class='table-borderless'>
-          <th class='col-xs-3'>
+          <th class='col-sm-3'>
             <% if user == current_user_user %>
               <%= link_to 'プロフィールを編集する',edit_user_user_path(user),class: "btn btn-outline-secondary btn-block edit_user_#{user.id}" %>
             <% end %>
