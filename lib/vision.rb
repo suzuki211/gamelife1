@@ -19,7 +19,7 @@ module Vision
           },
           features: [
             {
-              type: 'LABEL_DETECTION'
+              type: 'LOGO_DETECTION'
             }
           ]
         }]
@@ -37,7 +37,7 @@ module Vision
       if (error = response_body['responses'][0]['error']).present?
         raise error['message']
       else
-        response_body['responses'][0]['labelAnnotations'].pluck('description').take(3)
+        response_body['responses'][0]['logoAnnotations'].pluck('description').take(3)
       end
     end
   end
