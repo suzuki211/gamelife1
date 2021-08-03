@@ -80,3 +80,5 @@ end
 gem 'font-awesome-sass'
 
 gem 'rails-i18n'
+
+gem 'dotenv-rails'

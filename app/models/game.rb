@@ -1,6 +1,7 @@
 class Game < ApplicationRecord
   belongs_to :user
   belongs_to :genre
+  has_many :tags, dependent: :destroy
   has_many :game_comments, dependent: :destroy
   attachment :image
   has_many :favorites, dependent: :destroy
