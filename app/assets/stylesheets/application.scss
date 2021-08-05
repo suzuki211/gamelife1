@@ -38,3 +38,19 @@ footer {
    width: 50%;
    margin: auto;
 }
+
+.label {
+  background-color: yellowgreen;
+  font-weight: 500;
+  display: inline;
+  margin: .2em .6em .3em;
+  padding: .2em .6em .3em;
+  font-size: 75%;
+  font-weight: bold;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+}

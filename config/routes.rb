@@ -26,6 +26,7 @@ Rails.application.routes.draw do
     }
     resources :games, only: [:new, :create, :index, :show, :edit, :destroy, :update] do
       resources :game_comments, only: [:create, :destroy]
+      resources :tags, only: [:create, :destroy]
       resource :favorites, only: [:create, :destroy]
     end
     resources :users, only: [:index, :show, :edit, :update] do

@@ -15,10 +15,15 @@
     </div>
     <div class='row'>
   	  <!--ゲーム画像-->
-		  <div class='col-sm-5'>
+		  <div class='col-sm-4'>
         <%= attachment_image_tag(@game, :image, size: '300x220', fallback: 'no_image.jpg') %>
         <% @game.tags.each do |tag| %>
-          <span class="label"><%= tag.name %></span>
+          <span class="label">
+            <%= tag.name %>
+            <% if tag.user == current_user_user %>
+              <%= link_to "×", user_game_tag_path(tag.game, tag), method: :delete %>
+            <% end %>
+          </span>
         <% end %>
       </div>
       <div class='col-sm-7'>

@@ -10,7 +10,7 @@
       <th class='text-center col-md-1'>コメント</th>
     </tr>
   </thead>
-  <% @games.each do |game| %>
+    <% @games.each do |game| %>
     <tbody>
       <tr>
         <td id='img_field'>
@@ -35,6 +35,7 @@
       </tr>
     </tbody>
   <% end %>
+  <%= paginate @games %>
 </table>
 <!--評価用画像等-->
 <script>

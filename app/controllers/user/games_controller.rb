@@ -12,8 +12,8 @@ class User::GamesController < ApplicationController
     @game.user_id = current_user_user.id
     if @game.save
       tags = Vision.get_image_data(@game.image)
-      tags.each do |tag|
-        @game.tags.create(name: tag)
+      tags&.each do |tag|
+        @game.tags.create(name: tag,user_id: current_user_user.id)
       end
       flash[:notice] = '投稿に成功しました.'
       redirect_to user_game_path(@game.id)

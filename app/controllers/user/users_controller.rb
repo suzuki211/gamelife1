@@ -1,12 +1,13 @@
 class User::UsersController < ApplicationController
   #ユーザー一覧
   def index
-    @users = User.all
+    @users = User.page(params[:page]).reverse_order
   end
   #ユーザー詳細
   def show
     @user = User.find(params[:id])
     @games = @user.games.all
+    @games = @user.games.page(params[:page]).reverse_order
   end
   #ユーザー情報編集
   def edit
