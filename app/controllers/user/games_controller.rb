@@ -52,6 +52,10 @@ class User::GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     if @game.update(game_params)
+      tags = Vision.get_image_data(@game.image)
+      tags&.each do |tag|
+        @game.tags.create(name: tag,user_id: current_user_user.id)
+      end
       redirect_to user_game_path(@game.id)
       flash[:notice] = '編集に成功しました.'
     else
