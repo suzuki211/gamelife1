@@ -11,8 +11,10 @@
         <!--検索結果(Name)-->
         <% if @range == "UserName" %>
           <% if @users.empty? %>
+          <!--検索結果が該当しない場合-->
             <h2>該当するユーザーはいません</h2>
           <% else %>
+            <!--検索結果が該当する場合-->
             <thead class='thead-dark'>
               <tr>
                 <th>image</th>
@@ -37,8 +39,10 @@
         <% elsif @range == "GameTitle" %>
         <!--検索結果(game)-->
           <% if @games.empty? %>
+          <!--検索結果が該当しない場合-->
             <h2>該当するタイトルはありません</h2>
           <% else %>
+            <!--検索結果が該当する場合-->
             <thead class='thead-dark'>
               <tr>
                 <th class='text-center col-md-3'>ゲーム画像</th>

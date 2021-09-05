@@ -1,11 +1,13 @@
 <!--いいね機能部分テンプレート-->
 <% if game.favorited_by?(current_user_user) %>
+    <!--いいねを消す-->
     <p>
       <%= link_to user_game_favorites_path(game), method: :delete, remote: true do %>
         ♥<%= game.favorites.count %>
       <% end %>
     </p>
   <% else %>
+    <!--いいねを押す-->
     <p>
       <%= link_to user_game_favorites_path(game), method: :post, remote: true do %>
         ♡<%= game.favorites.count %>

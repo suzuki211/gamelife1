@@ -13,7 +13,7 @@ class Game < ApplicationRecord
   def favorited_by?(user)
     favorites.where(user_id: user.id).exists?
   end
-  # 検索方法分岐
+  # 検索方法用分岐
   def self.looks(search, word)
     if search == "perfect_match"
       @game = Game.where("title LIKE?","#{word}")
